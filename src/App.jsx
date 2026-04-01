@@ -1,4 +1,5 @@
 import SearchBar from "./components/SearchBar"
+import MovieCard from "./components/MovieCard"
 import useMovieSearch from "./hooks/useMovieSearch"
 import { useState } from "react"
 
@@ -14,7 +15,7 @@ function App() {
         onSearch={setQuery}
       />
       {movies.map((movie) => (
-        <p key={movie.id}>{movie.title}</p>
+        <MovieCard key={movie.id} movie={movie} />
       ))}
     </div>
   )
