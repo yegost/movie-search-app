@@ -1,23 +1,19 @@
-import SearchBar from "./components/SearchBar"
-import MovieCard from "./components/MovieCard"
-import useMovieSearch from "./hooks/useMovieSearch"
-import { useState } from "react"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Home from './pages/Home'
+import SearchResults from "./pages/SearchResults"
+import MovieDetail from "./pages/MovieDetail"
+import Favorites from "./pages/Favorites"
 
 function App() {
-  const [query, setQuery] = useState('')
-
-  const { movies, loading, error } = useMovieSearch(query)
-
-  return (
-    <div>
-      <h1>Movie App</h1>
-      <SearchBar
-        onSearch={setQuery}
-      />
-      {movies.map((movie) => (
-        <MovieCard key={movie.id} movie={movie} />
-      ))}
-    </div>
+  return(
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/search" element={<SearchResults />} />
+        <Route path="/movie/:id" element={<MovieDetail />} />
+        <Route path="/favorites" element={<Favorites />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
