@@ -24,7 +24,10 @@ function useMovieSearch(query) {
                     }
                 )
                 const data = await response.json()
-                setMovies(data.results || [])
+                const filtered = (data.results || []).filter(
+                    m => m.backdrop_path && m.poster_path
+                )
+                setMovies(filtered)
             } catch(error) {
                 setError('Something went wrong')
             } finally {

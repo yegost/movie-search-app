@@ -17,7 +17,7 @@ function Favorites() {
                             <img 
                                 src={`/hero.jpg`} 
                                 alt="Absolute Cinema" 
-                                className="w-50 h-40 object-cover rounded-lg shadow-2xl border-2 border-zinc-700 opacity-90"
+                                className="w-50 h-40 object-cover rounded-lg shadow-2xl border-1 border-zinc-700 opacity-90"
                             />
                         </div>
                     </div>

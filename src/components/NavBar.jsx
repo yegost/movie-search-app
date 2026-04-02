@@ -1,15 +1,36 @@
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import SearchBar from "./SearchBar"
 
 function NavBar() {
     const location = useLocation()
     const navigate = useNavigate()
     const [query, setQuery] = useState('')
+    const [searchOpen, setSearchOpen] = useState(false)
+    const [navOpen, setNavOpen] = useState(false)
+    const searchRef = useRef(null)
+    const navRef = useRef(null)
 
     const handleSearch = () => {
-        if (query) navigate(`/search?query=${query}`)
+        if (query) {
+            navigate(`/search?query=${query}`)
+            setSearchOpen(false)
+        }
     }
+
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (searchRef.current && !searchRef.current.contains(e.target)) {
+                setSearchOpen(false)
+            }
+            if (navRef.current && !navRef.current.contains(e.target)) {
+                setNavOpen(false)
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => document.removeEventListener('mousedown', handleClickOutside)
+    }, [])
 
     const linkClass = (path) => 
         location.pathname === path
@@ -18,24 +39,62 @@ function NavBar() {
 
     return(
         <header className="bg-zinc-950 border-b border-zinc-800 flex items-center justify-between px-8 py-6">
-            <div className="mr-10 hidden sm:block">
+            <div>
                 <Link to="/"><h2 className="italic text-red-500 tracking-tight">MOVIE SEARCH</h2></Link>
             </div>
-            <div className="hidden md:flex m-5 space-x-6 text-xs tracking-widest font-semibold">
-                <Link to="/" className={linkClass("/")}>HOME</Link>
-                <Link to="/favorites" className={linkClass("/favorites")}>FAVORITES</Link>
-            </div>
-            {location.pathname !== "/" && (
-                <div className="sm:ml-auto mx-auto sm:mx-0">
-                    <SearchBar 
-                        onSearch={setQuery} 
-                        onKeyDown={handleSearch} 
-                        className="text-sm px-4 py-2 bg-zinc-800 text-white rounded-lg w-72 border border-zinc-600 focus:outline-none focus:border-red-500 focus:shadow-[0_0_10px_rgba(239,68,68,0.4)] transition-all duration-200"
-                        placeholder="Search movies..."
-                    />
+            <div className="block sm:hidden">
+                <button 
+                    className="cursor-pointer"
+                    onClick={() => setNavOpen(!navOpen)}
+                >
+                    <img className="pt-2 pb-2" src="/nav.png" alt="Nav button" />
+                </button>
+                <div className={`absolute bg-black inset-y-0 right-0 transition-all duration-300 z-100 border-l border-zinc-800 ${navOpen ? "w-80" : "w-0"}`} ref={navRef}>
+                    <div className="p-5 border-b border-zinc-800 flex justify-between">
+                        <button
+                            className="cursor-pointer"
+                            onClick={() => setNavOpen(!navOpen)}
+                        >
+                            <img src="/close.png" alt="Close button" />
+                        </button>
+                        <h3 className="text-white">MENU</h3>
+                    </div>
+                    <div className="flex flex-col p-5 gap-3">
+                        <div className="text-2xl">
+                            <Link to="/" className={linkClass("/")}>HOME</Link>
+                        </div>
+                        <div className="text-2xl">
+                            <Link to="/favorites" className={linkClass("/favorites")}>FAVORITES</Link>
+                        </div>
+                    </div>
                 </div>
-
-            )}
+            </div>
+            <div className="flex flex-row hidden sm:flex">
+                {location.pathname !== "/" && (
+                    <div className="flex items-center gap-2" ref={searchRef}>
+                        <div className={`overflow-hidden transition-all duration-300 ${searchOpen ? 'w-64' : 'w-0'}`}>
+                            <SearchBar 
+                                onSearch={setQuery} 
+                                onKeyDown={handleSearch} 
+                                className="text-sm px-4 py-2 bg-zinc-800 text-white rounded-lg w-64 border-zinc-600 focus:outline-none border focus:border-red-500 transition-all duration-250"
+                                placeholder="Search movies..."
+                            />
+                        </div>
+                        <button 
+                            onClick={() => setSearchOpen(!searchOpen)}
+                            className="text-zinc-400 hover:text-red-500 transition-colors cursor-pointer duration-200"
+                        >
+                            {!searchOpen && (
+                                <img src="/search.png" alt="Search button" className="w-6" />
+                            )}
+                        </button>    
+                    </div>
+                )}
+                <div className="m-4 mb-5 space-x-6 text-xs tracking-widest font-semibold">
+                    <Link to="/" className={linkClass("/")}>HOME</Link>
+                    <Link to="/favorites" className={linkClass("/favorites")}>FAVORITES</Link>
+                </div>
+            </div>
         </header>
     )
 }

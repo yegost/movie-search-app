@@ -6,10 +6,7 @@ function MovieCard({ movie }) {
             <Link to={`/movie/${movie.id}`}>
                 <div className="group relative flex flex-col rounded-lg overflow-hidden bg-zinc-900 hover:scale-105 transition-all duration-300 cursor-pointer">
                     <div className="relative">
-                        <img src={movie.poster_path 
-                            ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` 
-                            : "./posterPlaceholder.png"} alt={movie.title} 
-                        />
+                        <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
                         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300"></div>
                     </div>
                     <div className="p-3 flex flex-col gap-1">
