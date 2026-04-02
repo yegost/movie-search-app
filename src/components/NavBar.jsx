@@ -15,6 +15,7 @@ function NavBar() {
         if (query) {
             navigate(`/search?query=${query}`)
             setSearchOpen(false)
+            setQuery('')
         }
     }
 
@@ -38,7 +39,7 @@ function NavBar() {
             : "text-zinc-400 hover:text-red-800"
 
     return(
-        <header className="bg-zinc-950 border-b border-zinc-800 flex items-center justify-between px-8 py-6">
+        <header className="sticky top-0 z-50 bg-zinc-950 border-b border-zinc-800 flex items-center justify-between px-8 py-6">
             <div>
                 <Link to="/"><h2 className="italic text-red-500 tracking-tight">MOVIE SEARCH</h2></Link>
             </div>
@@ -49,11 +50,17 @@ function NavBar() {
                 >
                     <img className="pt-2 pb-2" src="/nav.png" alt="Nav button" />
                 </button>
-                <div className={`absolute bg-black inset-y-0 right-0 transition-all duration-300 z-100 border-l border-zinc-800 ${navOpen ? "w-80" : "w-0"}`} ref={navRef}>
+                {navOpen && (
+                    <div 
+                        className="fixed inset-0 bg-black/50 z-40"
+                        onClick={() => setNavOpen(false)}
+                    />
+                )}
+                <div className={`fixed bg-black top-0 right-0 bottom-0 transition-all duration-300 z-50 border-l border-zinc-800 ${navOpen ? "w-80" : "w-0"}`} ref={navRef}>
                     <div className="p-5 border-b border-zinc-800 flex justify-between">
                         <button
                             className="cursor-pointer"
-                            onClick={() => setNavOpen(!navOpen)}
+                            onClick={() => setNavOpen(false)}
                         >
                             <img src="/close.png" alt="Close button" />
                         </button>
@@ -61,15 +68,21 @@ function NavBar() {
                     </div>
                     <div className="flex flex-col p-5 gap-3">
                         <div className="text-2xl">
-                            <Link to="/" className={linkClass("/")}>HOME</Link>
+                            <Link 
+                                to="/" 
+                                onClick={() => setNavOpen(false)} 
+                                className={linkClass("/")}>HOME</Link>
                         </div>
                         <div className="text-2xl">
-                            <Link to="/favorites" className={linkClass("/favorites")}>FAVORITES</Link>
+                            <Link 
+                                to="/favorites" 
+                                onClick={() => setNavOpen(false)}
+                                className={linkClass("/favorites")}>FAVORITES</Link>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="flex flex-row hidden sm:flex">
+            <div className="hidden sm:flex flex-row items-center">
                 {location.pathname !== "/" && (
                     <div className="flex items-center gap-2" ref={searchRef}>
                         <div className={`overflow-hidden transition-all duration-300 ${searchOpen ? 'w-64' : 'w-0'}`}>
