@@ -47,8 +47,8 @@ function MovieDetail() {
                 <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900/90 bg-black/60" />
                 <div className="relative flex flex-col ml-10 mb-10">
                     <div className="flex gap-1 z-10 text-white">
-                        {movie.adult && <span>"18+ - "</span>}
-                        <span>{movie.release_date.slice(0, 4)} - </span>
+                        {movie.adult && <span>"18+ · "</span>}
+                        <span>{movie.release_date.slice(0, 4)} · </span>
                         <span className="flex flex-row">{Math.floor(movie.runtime / 60)}H {movie.runtime % 60}M</span>
                     </div>
                     <div className="relative">
@@ -63,15 +63,23 @@ function MovieDetail() {
                             <h3 className="text-red-500 text-xs tracking-widest uppercase font-semibold mb-4">Description</h3>
                             <p className="text-zinc-300 text-sm leading-relaxed">{movie.overview}</p>
                         </div>
-                        <div>
-                            <p>genre</p>
-                            <p>{movie.genres.map((genre) => (
-                                <span key={genre.id}>{genre.name}</span>
-                            ))}</p>
-                            <p>director</p>
-                            <p>{movie.credits.crew.filter((p) => p.known_for_department === "Directing")[0].name}</p>
-                            <p>box office</p>
-                            <p>{formatRevenue(movie.revenue)}</p>
+                        <div className="flex flex-col gap-5 min-w-[200px] bg-zinc-900 rounded-lg p-5">
+                            <div>
+                                <p className="text-zinc-500 text-xs tracking-widest mb-1">GENRE</p>
+                                <p className="text-white text-sm font-semibold">{movie.genres.map((genre, i) => (
+                                    <span key={genre.id}>
+                                        {genre.name}{i < movie.genres.length - 1 && <span className="text-zinc-500"> · </span>}
+                                    </span>
+                                ))}</p>
+                            </div>
+                            <div>
+                                <p className="text-zinc-500 text-xs tracking-widest uppercase mb-1">director</p>
+                                <p className="text-white text-sm font-bold uppercase">
+                                    {movie.credits.crew.filter((p) => p.known_for_department === "Directing")[0].name}
+                                </p>
+                                <p className="text-zinc-500 text-xs tracking-widest uppercase my-1">box office</p>
+                                <p className="text-white text-lg">{formatRevenue(movie.revenue)}</p>
+                            </div>
                         </div>
                     </div>
                     <div>
