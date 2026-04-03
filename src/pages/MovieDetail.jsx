@@ -40,14 +40,21 @@ function MovieDetail() {
     return(
         <>
             <NavBar />
-            <section className="movie-detail-header">
-                <img src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`} />
-                <div>
-                    <p>{movie.adult ? "18+" : ""}</p>
-                    <p>{movie.release_date ? movie.release_date.slice(0, 4) : ''}</p>
-                    <p>{Math.floor(movie.runtime / 60)}H {movie.runtime % 60}M</p>
+            <section className="relative overflow-hidden min-h-[400px] bg-gray-900 flex items-end">
+                <img src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+                    className="absolute right-0 top-0 h-full w-full object-cover object-center"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900/90 bg-black/60" />
+                <div className="relative flex flex-col ml-10 mb-10">
+                    <div className="flex gap-1 z-10 text-white">
+                        {movie.adult && <span>"18+ - "</span>}
+                        <span>{movie.release_date.slice(0, 4)} - </span>
+                        <span className="flex flex-row">{Math.floor(movie.runtime / 60)}H {movie.runtime % 60}M</span>
+                    </div>
+                    <div className="relative">
+                        <h1 className="text-white text-6xl">{movie.title}</h1>
+                    </div>
                 </div>
-                <h1>{movie.title}</h1>
             </section>
             <section className="movie-detail-body">
                 <div>
