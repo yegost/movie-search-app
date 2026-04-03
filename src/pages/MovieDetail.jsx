@@ -56,51 +56,53 @@ function MovieDetail() {
                     </div>
                 </div>
             </section>
-            <section className="movie-detail-body">
-                <div>
-                    <div className="movie-description">
-                        <h3>Description</h3>
-                        <p>{movie.overview}</p>
-                    </div>
-                    <div className="movie-genre">
-                        <p>genre</p>
-                        <p>{movie.genres.map((genre) => (
-                            <span key={genre.id}>{genre.name}</span>
-                        ))}</p>
-                        <p>director</p>
-                        <p>{movie.credits.crew.filter((p) => p.known_for_department === "Directing")[0].name}</p>
-                        <p>box office</p>
-                        <p>{formatRevenue(movie.revenue)}</p>
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <p>top cast</p>
+            <div className="max-w-5xl mx-auto w-full px-6 md:px-16">
+                <section className="my-5">
+                    <div className="flex flex-row justify-between">
+                        <div>
+                            <h3 className="">Description</h3>
+                            <p className="my-5 max-w-[600px]">{movie.overview}</p>
+                        </div>
+                        <div>
+                            <p>genre</p>
+                            <p>{movie.genres.map((genre) => (
+                                <span key={genre.id}>{genre.name}</span>
+                            ))}</p>
+                            <p>director</p>
+                            <p>{movie.credits.crew.filter((p) => p.known_for_department === "Directing")[0].name}</p>
+                            <p>box office</p>
+                            <p>{formatRevenue(movie.revenue)}</p>
+                        </div>
                     </div>
                     <div>
-                        <p>rating</p>
-                        <p><span>{movie.vote_average.toFixed(1)}</span>/10</p>
-                        <p>critic choice</p>
+                        <div>
+                            <p>top cast</p>
+                        </div>
+                        <div>
+                            <p>rating</p>
+                            <p><span>{movie.vote_average.toFixed(1)}</span>/10</p>
+                            <p>critic choice</p>
+                        </div>
                     </div>
-                </div>
-            </section>
-            <section>
-                <h3>Streaming</h3>
-                <p>buy</p>
-                {movie["watch/providers"]?.results?.GB?.buy.map((p) => (
-                    <div>
-                        <img src="" />
-                        <p>{p.provider_name}</p>
-                    </div>
-                ))}
-                <p>rent</p>
-                {movie["watch/providers"]?.results?.GB?.buy.map((p) => (
-                    <div>
-                        <img src="" />
-                        <p>{p.provider_name}</p>
-                    </div>
-                ))}
-            </section>
+                </section>
+                <section>
+                    <h3>Streaming</h3>
+                    <p>buy</p>
+                    {movie["watch/providers"]?.results?.GB?.buy.map((p) => (
+                        <div>
+                            <img src="" />
+                            <p>{p.provider_name}</p>
+                        </div>
+                    ))}
+                    <p>rent</p>
+                    {movie["watch/providers"]?.results?.GB?.buy.map((p) => (
+                        <div>
+                            <img src="" />
+                            <p>{p.provider_name}</p>
+                        </div>
+                    ))}
+                </section>
+            </div>
         </>
     )
 }
