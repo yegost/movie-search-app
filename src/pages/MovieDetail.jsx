@@ -38,7 +38,7 @@ function MovieDetail() {
     if (!movie) return <p>Loading...</p>
 
     return(
-        <>
+        <div className="min-h-screen bg-zinc-950 text-white">
             <NavBar />
             <section className="relative overflow-hidden min-h-[400px] bg-gray-900 flex items-end">
                 <img src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
@@ -57,7 +57,7 @@ function MovieDetail() {
                 </div>
             </section>
             <div className="max-w-5xl mx-auto w-full px-6 md:px-16">
-                <section className="my-10">
+                <section className="">
                     <div className="flex flex-row justify-between gap-10">
                         <div className="flex-1">
                             <h3 className="text-red-500 text-xs tracking-widest uppercase font-semibold mb-4">Description</h3>
@@ -65,20 +65,24 @@ function MovieDetail() {
                         </div>
                         <div className="flex flex-col gap-5 min-w-[200px] bg-zinc-900 rounded-lg p-5">
                             <div>
-                                <p className="text-zinc-500 text-xs tracking-widest mb-1">GENRE</p>
-                                <p className="text-white text-sm font-semibold">{movie.genres.map((genre, i) => (
-                                    <span key={genre.id}>
-                                        {genre.name}{i < movie.genres.length - 1 && <span className="text-zinc-500"> · </span>}
-                                    </span>
-                                ))}</p>
+                                <p className="text-zinc-500 text-xs tracking-widest uppercase mb-1">Genre</p>
+                                <p className="text-white text-sm font-semibold">
+                                    {movie.genres.map((genre, i) => (
+                                        <span key={genre.id}>
+                                            {genre.name}{i < movie.genres.length - 1 && <span className="text-zinc-500"> · </span>}
+                                        </span>
+                                    ))}
+                                </p>
                             </div>
                             <div>
-                                <p className="text-zinc-500 text-xs tracking-widest uppercase mb-1">director</p>
+                                <p className="text-zinc-500 text-xs tracking-widest uppercase mb-1">Director</p>
                                 <p className="text-white text-sm font-bold uppercase">
-                                    {movie.credits.crew.filter((p) => p.known_for_department === "Directing")[0].name}
+                                    {movie.credits.crew.filter((p) => p.known_for_department === "Directing")[0]?.name}
                                 </p>
-                                <p className="text-zinc-500 text-xs tracking-widest uppercase my-1">box office</p>
-                                <p className="text-white text-lg">{formatRevenue(movie.revenue)}</p>
+                            </div>
+                            <div>
+                                <p className="text-zinc-500 text-xs tracking-widest uppercase mb-1">Box Office</p>
+                                <p className="text-white text-sm">{formatRevenue(movie.revenue)}</p>
                             </div>
                         </div>
                     </div>
@@ -111,7 +115,7 @@ function MovieDetail() {
                     ))}
                 </section>
             </div>
-        </>
+        </div>
     )
 }
 
