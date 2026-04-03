@@ -57,11 +57,11 @@ function MovieDetail() {
                 </div>
             </section>
             <div className="max-w-5xl mx-auto w-full px-6 md:px-16">
-                <section className="my-5">
-                    <div className="flex flex-row justify-between">
-                        <div>
-                            <h3 className="">Description</h3>
-                            <p className="my-5 max-w-[600px]">{movie.overview}</p>
+                <section className="my-10">
+                    <div className="flex flex-row justify-between gap-10">
+                        <div className="flex-1">
+                            <h3 className="text-red-500 text-xs tracking-widest uppercase font-semibold mb-4">Description</h3>
+                            <p className="text-zinc-300 text-sm leading-relaxed">{movie.overview}</p>
                         </div>
                         <div>
                             <p>genre</p>
