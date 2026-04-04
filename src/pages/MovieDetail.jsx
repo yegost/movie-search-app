@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
 import { useParams } from 'react-router-dom'
+import CastCard from "../components/CastCard";
 
 function MovieDetail() {
     const [movie, setMovie] = useState(null)
@@ -42,9 +43,9 @@ function MovieDetail() {
             <NavBar />
             <section className="relative overflow-hidden min-h-[400px] bg-gray-900 flex items-end">
                 <img src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-                    className="absolute right-0 top-0 h-full w-full object-cover object-center"
+                    className="absolute right-0 top-0 h-full w-5/6 object-cover object-left-top"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900/90 bg-black/60" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black via-gray-900/30 bg-black/80" />
                 <div className="relative flex flex-col ml-10 mb-10">
                     <div className="flex gap-1 z-10 text-white">
                         {movie.adult && <span>"18+ · "</span>}
@@ -56,16 +57,27 @@ function MovieDetail() {
                     </div>
                 </div>
             </section>
-            <div className="max-w-5xl mx-auto w-full px-6 md:px-16">
-                <section className="">
-                    <div className="flex flex-row justify-between gap-10">
-                        <div className="flex-1">
-                            <h3 className="text-red-500 text-xs tracking-widest uppercase font-semibold mb-4">Description</h3>
+            <section className="max-w-5xl mx-auto w-full px-6 md:px-16">
+                <div className="flex flex-col md:flex-row justify-between gap-10 py-10">
+                    <div className="flex-1 flex flex-col gap-10">
+                        <div>
+                            <h3 className="text-red-500 font-bold mb-4">DESCRIPTION</h3>
                             <p className="text-zinc-300 text-sm leading-relaxed">{movie.overview}</p>
                         </div>
-                        <div className="flex flex-col gap-5 min-w-[200px] bg-zinc-900 rounded-lg p-5">
+                        <div>
+                            <h3 className="text-white font-bold mb-4">TOP CAST</h3>
+                            <div className="flex flex-wrap gap-4">
+                                {movie.credits.cast.slice(0, 4).map((actor) => (
+                                    <CastCard key={actor.id} actor={actor} />
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div className="flex flex-col gap-5 w-full md:w-[220px]">
+                        <div className="bg-zinc-900 border-l-2 border-r-2 rounded-lg p-5 flex flex-col gap-5">
                             <div>
-                                <p className="text-zinc-500 text-xs tracking-widest uppercase mb-1">Genre</p>
+                                <p className="text-zinc-500 text-xs tracking-widest mb-1">GENRE</p>
                                 <p className="text-white text-sm font-semibold">
                                     {movie.genres.map((genre, i) => (
                                         <span key={genre.id}>
@@ -75,46 +87,42 @@ function MovieDetail() {
                                 </p>
                             </div>
                             <div>
-                                <p className="text-zinc-500 text-xs tracking-widest uppercase mb-1">Director</p>
-                                <p className="text-white text-sm font-bold uppercase">
+                                <p className="text-zinc-500 text-xs tracking-widest mb-1">DIRECTOR</p>
+                                <p className="text-white text-lg font-bold uppercase">
                                     {movie.credits.crew.filter((p) => p.known_for_department === "Directing")[0]?.name}
                                 </p>
                             </div>
                             <div>
-                                <p className="text-zinc-500 text-xs tracking-widest uppercase mb-1">Box Office</p>
-                                <p className="text-white text-sm">{formatRevenue(movie.revenue)}</p>
+                                <p className="text-zinc-500 text-xs tracking-widest mb-1">BOX OFFICE</p>
+                                <p className="text-lg text-white">{formatRevenue(movie.revenue)}</p>
                             </div>
                         </div>
+                        <div className="bg-zinc-900 rounded-lg p-5 border-l-2 border-r-2 border-red-500 md:w-[220px]">
+                            <p className="bg-yellow-500 w-7 rounded-full text-white flex justify-center text-lg mb-2">★</p>
+                            <p className="text-white text-2xl font-bold tracking-wide mb-2">RATING</p>
+                            <p className="text-white text-3xl font-black">{movie.vote_average.toFixed(1)}<span className="text-zinc-500 text-lg font-semibold">/10</span></p>
+                            <p className="text-zinc-500 text-xs tracking-widest mt-1">CRITIC CHOICE</p>
+                        </div>
                     </div>
+                </div>
+            </section>
+            <section>
+                <h3>Streaming</h3>
+                <p>buy</p>
+                {movie["watch/providers"]?.results?.GB?.buy.map((p) => (
                     <div>
-                        <div>
-                            <p>top cast</p>
-                        </div>
-                        <div>
-                            <p>rating</p>
-                            <p><span>{movie.vote_average.toFixed(1)}</span>/10</p>
-                            <p>critic choice</p>
-                        </div>
+                        <img src="" />
+                        <p>{p.provider_name}</p>
                     </div>
-                </section>
-                <section>
-                    <h3>Streaming</h3>
-                    <p>buy</p>
-                    {movie["watch/providers"]?.results?.GB?.buy.map((p) => (
-                        <div>
-                            <img src="" />
-                            <p>{p.provider_name}</p>
-                        </div>
-                    ))}
-                    <p>rent</p>
-                    {movie["watch/providers"]?.results?.GB?.buy.map((p) => (
-                        <div>
-                            <img src="" />
-                            <p>{p.provider_name}</p>
-                        </div>
-                    ))}
-                </section>
-            </div>
+                ))}
+                <p>rent</p>
+                {movie["watch/providers"]?.results?.GB?.buy.map((p) => (
+                    <div>
+                        <img src="" />
+                        <p>{p.provider_name}</p>
+                    </div>
+                ))}
+            </section>
         </div>
     )
 }
