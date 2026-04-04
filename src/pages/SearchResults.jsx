@@ -8,6 +8,12 @@ function SearchResults() {
     const query = searchParams.get('query')
     const { movies, loading, error } = useMovieSearch(query)
 
+    if (error) return (
+        <div className="min-h-screen bg-zinc-950 flex items-center justify-center">
+            <p className="text-red-500 text-sm tracking-widest">Something went wrong!</p>
+        </div>
+    )
+
     return(
         <>
             <div className="min-h-screen bg-zinc-950 flex flex-col">
