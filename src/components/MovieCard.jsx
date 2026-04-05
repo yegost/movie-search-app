@@ -2,8 +2,14 @@ import { Link } from "react-router-dom"
 import useFavorites from "../store/useFavorites"
 
 function MovieCard({ movie }) {
-    const { addFavorites, removeFavorites, isFavorite } = useFavorites()
+    const { addFavorite, removeFavorite, isFavorite } = useFavorites()
     const isFav = isFavorite(movie.id)
+
+    const handleFavorite = (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        isFav ? removeFavorite(movie.id) : addFavorite(movie)
+    }
 
     return(
         <>
@@ -20,7 +26,10 @@ function MovieCard({ movie }) {
                             <p className="text-xs text-yellow-500 font-semibold">{movie.vote_average !== 0 ? "⭐ " + movie.vote_average.toFixed(1) : ''}</p>
                         </div>
                     </div>
-                    <button className="absolute z-100 w-10 h-10">
+                    <button 
+                        onClick={handleFavorite}
+                        className={`absolute top-2 right-2 w-9 h-9 pt-[2px] pr-[1px] rounded-full flex items-center justify-center bg-black/80 text-lg transition-colors ${isFav ? "text-red-500" : "text-white hover:text-red-500"}`}
+                        >
                         {isFav ? "♥" : "♡"}
                     </button>
                 </div>
