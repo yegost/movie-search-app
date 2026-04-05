@@ -4,13 +4,12 @@ import useFavorites from "../store/useFavorites";
 
 function Favorites() {
     const { favorites } = useFavorites()
-    console.log(favorites)
 
     return(
         <>
             <div className="min-h-screen bg-zinc-950 flex flex-col">
                 <NavBar />
-                <section className="relative bg-zinc-950 px-6 md:px-16 py-12 pb-0 overflow-hidden">
+                <section className="relative bg-zinc-950 px-6 md:px-16 py-12 overflow-hidden">
                     <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-zinc-800/40 to-transparent" />
                     <div className="relative z-10 max-w-5xl mx-auto flex border-b border-zinc-800 items-center">
                         <div className="text-white flex-1">
@@ -26,7 +25,9 @@ function Favorites() {
                             />
                         </div>
                     </div>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+                </section>
+                <section className="relative z-10 max-w-5xl mx-auto w-full px-6 md:px-16 pb-10">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 max-w-[900px]">
                         {favorites.map((movie) => (
                             <MovieCard key={movie.id} movie={movie} />
                         ))}
