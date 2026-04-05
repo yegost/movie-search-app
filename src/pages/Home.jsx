@@ -1,5 +1,6 @@
 import NavBar from "../components/NavBar";
 import SearchBar from "../components/SearchBar";
+import useTrending from "../hooks/useTrending";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react"
 
@@ -10,6 +11,9 @@ function Home() {
     const handleSearch = () => {
         if (query) navigate(`/search?query=${query}`)
     }
+
+    const { movies, loading, error } = useTrending()
+    console.log(movies)
 
     return(
         <>
@@ -34,7 +38,7 @@ function Home() {
                 <section className="flex-1 w-full max-w-5xl mx-auto w-full px-8 py-4 text-white">
                     <div className="flex flex-wrap justify-between items-center border-b border-zinc-800 pb-2">
                         <h2>Recommended for you</h2>
-                        <p><span>0</span> RESULTS FOUND</p>
+                        <p><span>{movies.length}</span> RESULTS FOUND</p>
                     </div>
                 </section>
 

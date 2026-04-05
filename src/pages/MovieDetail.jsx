@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
 import { useParams } from 'react-router-dom'
 import CastCard from "../components/CastCard";
