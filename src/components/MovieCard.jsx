@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom"
+import useFavorites from "../store/useFavorites"
 
 function MovieCard({ movie }) {
+    const { addFavorites, removeFavorites, isFavorite } = useFavorites()
+    const isFav = isFavorite(movie.id)
+
     return(
         <>
             <Link to={`/movie/${movie.id}`}>
@@ -16,6 +20,9 @@ function MovieCard({ movie }) {
                             <p className="text-xs text-yellow-500 font-semibold">{movie.vote_average !== 0 ? "⭐ " + movie.vote_average.toFixed(1) : ''}</p>
                         </div>
                     </div>
+                    <button className="absolute z-100 w-10 h-10">
+                        {isFav ? "♥" : "♡"}
+                    </button>
                 </div>
             </Link>
         </>
