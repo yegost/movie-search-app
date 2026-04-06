@@ -146,11 +146,11 @@ function MovieDetail() {
                                 <p className="text-zinc-500 text-xs tracking-widest uppercase mb-3">Buy</p>
                                 <div className="flex flex-wrap gap-3">
                                     {buy.map((p) => (
-                                        <div key={p.provider_id} className="flex flex-col items-center gap-2 w-16">
+                                        <div key={p.provider_id} className="flex flex-col items-center gap-2 w-24">
                                             <img 
                                                 src={`https://image.tmdb.org/t/p/w92${p.logo_path}`} 
                                                 alt={p.provider_name}
-                                                className="w-12 h-12 rounded-lg object-cover"
+                                                className="w-18 h-18 rounded-lg object-cover"
                                             />
                                             <p className="text-zinc-400 text-xs text-center leading-tight">{p.provider_name}</p>
                                         </div>
