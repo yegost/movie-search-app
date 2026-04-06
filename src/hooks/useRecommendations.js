@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 
-function Recommendations({ id }) {
+function useRecommendations(id) {
     const [movies, setMovies] = useState([])
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
@@ -31,4 +31,4 @@ function Recommendations({ id }) {
     return { movies, loading, error}
 }
 
-export default Recommendations
+export default useRecommendations

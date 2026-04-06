@@ -1,11 +1,14 @@
 import NavBar from "../components/NavBar";
 import { useParams } from 'react-router-dom'
 import CastSlider from "../components/CastSlider";
+import MovieCard from "../components/MovieCard";
 import useMovieDetail from "../hooks/useMovieDetail";
+import useRecommendations from "../hooks/useRecommendations";
 
 function MovieDetail() {
     const { id } = useParams()
     const { movie, loading, error } = useMovieDetail(id)
+    const { movies: recommendations, loading: recLoading, error: recError } = useRecommendations(id)
 
     const formatRevenue = (revenue) => {
         if (!revenue || revenue === 0) return 'N/A'
@@ -34,8 +37,6 @@ function MovieDetail() {
     const rent = watchGB?.rent
     const buy = watchGB?.buy
 
-    console.log(rent)
-
     return(
         <div className="min-h-screen bg-zinc-950 text-white">
             <NavBar />
@@ -55,7 +56,7 @@ function MovieDetail() {
                     </div>
                 </div>
             </section>
-            <main className="py-5">
+            <main className="py-10">
                 <section className="max-w-5xl mx-auto w-full px-6 md:px-16">
                     <div className="flex flex-col md:flex-row justify-between gap-10 pb-10">
                         <div className="flex-1 flex flex-col gap-10 min-w-0">
@@ -97,67 +98,76 @@ function MovieDetail() {
                         </div>
                     </div>
                 </section>
+                <section className="max-w-5xl mx-auto w-full px-6 md:px-16">
+                    <div className="py-10 border-t border-zinc-800">
+                        <h3 className="text-white font-bold mb-6">WHERE TO WATCH</h3>
+                        {!flatrate && !rent && !buy && (
+                            <p className="text-zinc-500 text-sm tracking-widest">Not available to watch online in your region.</p>
+                        )}
+                        <div className="flex flex-col gap-8">
+                            {flatrate && (
+                                <div>
+                                    <p className="text-zinc-500 text-xs tracking-widest uppercase mb-3">Stream</p>
+                                    <div className="flex flex-wrap gap-3">
+                                        {flatrate.map((p) => (
+                                            <div key={p.provider_id} className="flex flex-col items-center gap-2 w-24">
+                                                <img 
+                                                    src={`https://image.tmdb.org/t/p/w92${p.logo_path}`} 
+                                                    alt={p.provider_name}
+                                                    className="w-18 h-18 rounded-lg object-cover"
+                                                />
+                                                <p className="text-zinc-400 text-xs text-center leading-tight">{p.provider_name}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                            {rent && (
+                                <div>
+                                    <p className="text-zinc-500 text-xs tracking-widest uppercase mb-3">Rent</p>
+                                    <div className="flex flex-wrap gap-3">
+                                        {rent.map((p) => (
+                                            <div key={p.provider_id} className="flex flex-col items-center gap-2 w-24">
+                                                <img 
+                                                    src={`https://image.tmdb.org/t/p/w92${p.logo_path}`} 
+                                                    alt={p.provider_name}
+                                                    className="w-18 h-18 rounded-lg object-cover"
+                                                />
+                                                <p className="text-zinc-400 text-xs text-center leading-tight">{p.provider_name}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {buy && (
+                                <div>
+                                    <p className="text-zinc-500 text-xs tracking-widest uppercase mb-3">Buy</p>
+                                    <div className="flex flex-wrap gap-3">
+                                        {buy.map((p) => (
+                                            <div key={p.provider_id} className="flex flex-col items-center gap-2 w-24">
+                                                <img 
+                                                    src={`https://image.tmdb.org/t/p/w92${p.logo_path}`} 
+                                                    alt={p.provider_name}
+                                                    className="w-18 h-18 rounded-lg object-cover"
+                                                />
+                                                <p className="text-zinc-400 text-xs text-center leading-tight">{p.provider_name}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </section>
                 <section className="max-w-5xl mx-auto w-full px-6 md:px-16 pb-16">
-                    <h3 className="text-white font-bold mb-6 border-t border-zinc-800 pt-8">WHERE TO WATCH</h3>
-                    
-                    {!flatrate && !rent && !buy && (
-                        <p className="text-zinc-500 text-sm tracking-widest">Not available to watch online in your region.</p>
-                    )}
-
-                    <div className="flex flex-col gap-8">
-                        {flatrate && (
-                            <div>
-                                <p className="text-zinc-500 text-xs tracking-widest uppercase mb-3">Stream</p>
-                                <div className="flex flex-wrap gap-3">
-                                    {flatrate.map((p) => (
-                                        <div key={p.provider_id} className="flex flex-col items-center gap-2 w-16">
-                                            <img 
-                                                src={`https://image.tmdb.org/t/p/w92${p.logo_path}`} 
-                                                alt={p.provider_name}
-                                                className="w-12 h-12 rounded-lg object-cover"
-                                            />
-                                            <p className="text-zinc-400 text-xs text-center leading-tight">{p.provider_name}</p>
-                                        </div>
-                                    ))}
-                                </div>
+                    <h3 className="text-white font-bold mb-6 border-t border-zinc-800 pt-8">MORE LIKE THIS</h3>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                        {recommendations.slice(0, 4).map((movie) => (
+                            <div className="">
+                                <MovieCard key={movie.id} movie={movie} />
                             </div>
-                        )}
-
-                        {rent && (
-                            <div>
-                                <p className="text-zinc-500 text-xs tracking-widest uppercase mb-3">Rent</p>
-                                <div className="flex flex-wrap gap-3">
-                                    {rent.map((p) => (
-                                        <div key={p.provider_id} className="flex flex-col items-center gap-2 w-16">
-                                            <img 
-                                                src={`https://image.tmdb.org/t/p/w92${p.logo_path}`} 
-                                                alt={p.provider_name}
-                                                className="w-12 h-12 rounded-lg object-cover"
-                                            />
-                                            <p className="text-zinc-400 text-xs text-center leading-tight">{p.provider_name}</p>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-
-                        {buy && (
-                            <div>
-                                <p className="text-zinc-500 text-xs tracking-widest uppercase mb-3">Buy</p>
-                                <div className="flex flex-wrap gap-3">
-                                    {buy.map((p) => (
-                                        <div key={p.provider_id} className="flex flex-col items-center gap-2 w-24">
-                                            <img 
-                                                src={`https://image.tmdb.org/t/p/w92${p.logo_path}`} 
-                                                alt={p.provider_name}
-                                                className="w-18 h-18 rounded-lg object-cover"
-                                            />
-                                            <p className="text-zinc-400 text-xs text-center leading-tight">{p.provider_name}</p>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
+                        ))}
                     </div>
                 </section>
             </main>
