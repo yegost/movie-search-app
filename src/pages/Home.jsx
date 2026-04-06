@@ -22,7 +22,7 @@ function Home() {
                 <section
                     className="relative flex flex-col items-center justify-center py-16 overflow-hidden bg-zinc-950 "
                     >
-                    <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-zinc-800/40 to-transparent" />
+                    <div className="absolute top-0 left-0 right-0 h-32 bg-linear-to-b from-zinc-800/40 to-transparent" />
 
                     <div className="relative z-10 flex flex-col items-center text-center px-8 w-full max-w-2xl">
                         <p className="text-yellow-400 text-xs tracking-widest mb-4">DISCOVER CINEMA</p>

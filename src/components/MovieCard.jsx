@@ -28,7 +28,7 @@ function MovieCard({ movie }) {
                     </div>
                     <button 
                         onClick={handleFavorite}
-                        className={`absolute top-2 right-2 w-9 h-9 pt-[2px] pr-[1px] rounded-full flex items-center justify-center bg-black/80 text-lg transition-colors ${isFav ? "text-red-500" : "text-white hover:text-red-500"}`}
+                        className={`absolute top-2 right-2 w-9 h-9 pt-0.5 pr-px rounded-full flex items-center justify-center bg-black/80 text-lg transition-colors ${isFav ? "text-red-500" : "text-white hover:text-red-500"}`}
                         >
                         {isFav ? "♥" : "♡"}
                     </button>

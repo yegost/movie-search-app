@@ -19,7 +19,7 @@ function SearchResults() {
             <div className="min-h-screen bg-zinc-950 flex flex-col">
                 <NavBar />
                 <section className="relative bg-zinc-950 px-6 md:px-16 py-12 pb-0">
-                    <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-zinc-800/40 to-transparent " />
+                    <div className="absolute top-0 left-0 right-0 h-32 bg-linear-to-b from-zinc-800/40 to-transparent " />
                     <div className="max-w-5xl mx-auto">
                         <span className="text-xs tracking-widest bg-gray-700 text-red-400 px-3 py-2 rounded-full">SEARCH RESULTS</span>
                         <h1 className="tracking-wide font-black text-white mt-4 mb-3">Results for <span className="italic tracking-normal text-red-500 capitalize">”{query}”</span></h1>

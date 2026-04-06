@@ -10,7 +10,7 @@ function Favorites() {
             <div className="min-h-screen bg-zinc-950 flex flex-col">
                 <NavBar />
                 <section className="relative bg-zinc-950 px-6 md:px-16 py-12 overflow-hidden">
-                    <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-zinc-800/40 to-transparent" />
+                    <div className="absolute top-0 left-0 right-0 h-32 bg-linear-to-b from-zinc-800/40 to-transparent" />
                     <div className="relative z-10 max-w-5xl mx-auto flex items-center">
                         <div className="text-white flex-1">
                             <p className="text-yellow-400 text-xs tracking-widest mb-3">CURATED</p>
