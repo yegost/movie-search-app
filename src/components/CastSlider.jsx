@@ -5,11 +5,11 @@ function CastSlider({ cast }) {
     const sliderRef = useRef(null)
 
     const scrollLeft = () => {
-        sliderRef.current.scrollBy({ left: -300, behavior: 'smooth' })
+        sliderRef.current.scrollBy({ left: -200, behavior: 'smooth' })
     }
 
     const scrollRight = () => {
-        sliderRef.current.scrollBy({ left: 300, behavior: 'smooth' })
+        sliderRef.current.scrollBy({ left: 200, behavior: 'smooth' })
     }
 
     return(
