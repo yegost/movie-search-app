@@ -34,6 +34,8 @@ function MovieDetail() {
     const rent = watchGB?.rent
     const buy = watchGB?.buy
 
+    console.log(rent)
+
     return(
         <div className="min-h-screen bg-zinc-950 text-white">
             <NavBar />
@@ -95,34 +97,68 @@ function MovieDetail() {
                         </div>
                     </div>
                 </section>
-                <section className="max-w-5xl mx-auto w-full px-6 md:px-16">
-                    <h3 className="text-white font-bold">STREAMING</h3>
-                    {flatrate && (
-                        <div>
-                            <p>Stream</p>
-                            {flatrate.map((p) => (
-                                <div key={p}></div>
-                            ))}
-                        </div>
+                <section className="max-w-5xl mx-auto w-full px-6 md:px-16 pb-16">
+                    <h3 className="text-white font-bold mb-6 border-t border-zinc-800 pt-8">WHERE TO WATCH</h3>
+                    
+                    {!flatrate && !rent && !buy && (
+                        <p className="text-zinc-500 text-sm tracking-widest">Not available to watch online in your region.</p>
                     )}
 
-                    {rent && (
-                        <div>
-                            <p>Rent</p>
-                            {rent.map((p) => (
-                                <div key={p}></div>
-                            ))}
-                        </div>
-                    )}
+                    <div className="flex flex-col gap-8">
+                        {flatrate && (
+                            <div>
+                                <p className="text-zinc-500 text-xs tracking-widest uppercase mb-3">Stream</p>
+                                <div className="flex flex-wrap gap-3">
+                                    {flatrate.map((p) => (
+                                        <div key={p.provider_id} className="flex flex-col items-center gap-2 w-16">
+                                            <img 
+                                                src={`https://image.tmdb.org/t/p/w92${p.logo_path}`} 
+                                                alt={p.provider_name}
+                                                className="w-12 h-12 rounded-lg object-cover"
+                                            />
+                                            <p className="text-zinc-400 text-xs text-center leading-tight">{p.provider_name}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
 
-                    {buy && (
-                        <div>
-                            <p>Buy</p>
-                            {buy.map((p) => (
-                                <div key={p}></div>
-                            ))}
-                        </div>
-                    )}
+                        {rent && (
+                            <div>
+                                <p className="text-zinc-500 text-xs tracking-widest uppercase mb-3">Rent</p>
+                                <div className="flex flex-wrap gap-3">
+                                    {rent.map((p) => (
+                                        <div key={p.provider_id} className="flex flex-col items-center gap-2 w-16">
+                                            <img 
+                                                src={`https://image.tmdb.org/t/p/w92${p.logo_path}`} 
+                                                alt={p.provider_name}
+                                                className="w-12 h-12 rounded-lg object-cover"
+                                            />
+                                            <p className="text-zinc-400 text-xs text-center leading-tight">{p.provider_name}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {buy && (
+                            <div>
+                                <p className="text-zinc-500 text-xs tracking-widest uppercase mb-3">Buy</p>
+                                <div className="flex flex-wrap gap-3">
+                                    {buy.map((p) => (
+                                        <div key={p.provider_id} className="flex flex-col items-center gap-2 w-16">
+                                            <img 
+                                                src={`https://image.tmdb.org/t/p/w92${p.logo_path}`} 
+                                                alt={p.provider_name}
+                                                className="w-12 h-12 rounded-lg object-cover"
+                                            />
+                                            <p className="text-zinc-400 text-xs text-center leading-tight">{p.provider_name}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                    </div>
                 </section>
             </main>
         </div>
