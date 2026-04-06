@@ -13,18 +13,18 @@ function CastSlider({ cast }) {
     }
 
     return(
-        <div className="relative w-full overflow-hidden">
+        <div className="relative w-full">
             <h3 className="text-white font-bold mb-4">TOP CAST</h3>
-            <div className="relative group w-full">
+            <div className="relative group">
                 <button 
                     onClick={scrollLeft}
-                    className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-black/70 hover:bg-red-500 text-white w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200"
+                    className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-gray-200/70 hover:bg-red-500/70 text-black text-2xl w-8 h-8 rounded-full flex items-center justify-center -translate-x-4 transition-all duration-200"
                 >
                     ‹
                 </button>
                 <div 
                     ref={sliderRef}
-                    className="flex gap-4 overflow-x-auto scroll-smooth scrollbar-hide px-2"
+                    className="flex gap-4 overflow-x-auto scroll-smooth scrollbar-hide"
                 >
                     {cast.map((actor) => (
                         <div key={actor.id} className="shrink-0">
@@ -34,7 +34,7 @@ function CastSlider({ cast }) {
                 </div>
                 <button 
                     onClick={scrollRight}
-                    className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-black/70 hover:bg-red-500 text-white w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200"
+                    className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-gray-200/70 hover:bg-red-500/70 text-black text-2xl w-8 h-8 rounded-full flex items-center justify-center translate-x-4 transition-all duration-200"
                 >
                     ›
                 </button>
