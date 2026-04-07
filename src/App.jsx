@@ -12,6 +12,7 @@ function App() {
         <Route path="/search" element={<SearchResults />} />
         <Route path="/movie/:id" element={<MovieDetail />} />
         <Route path="/favorites" element={<Favorites />} />
+        <Route path="/person/:id" element={<PersonDetail />} />
       </Routes>
     </BrowserRouter>
   )

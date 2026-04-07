@@ -1,5 +1,5 @@
 import NavBar from "../components/NavBar";
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import CastSlider from "../components/CastSlider";
 import MovieCard from "../components/MovieCard";
 import useMovieDetail from "../hooks/useMovieDetail";
@@ -139,7 +139,6 @@ function MovieDetail() {
                                     </div>
                                 </div>
                             )}
-
                             {buy && (
                                 <div>
                                     <p className="text-zinc-500 text-xs tracking-widest uppercase mb-3">Buy</p>
@@ -162,6 +161,8 @@ function MovieDetail() {
                 </section>
                 <section className="max-w-5xl mx-auto w-full px-6 md:px-16 pb-16">
                     <h3 className="text-white font-bold mb-6 border-t border-zinc-800 pt-8">MORE LIKE THIS</h3>
+                    {recLoading && <p className="text-zinc-500 text-sm tracking-widest animate-pulse">LOADING...</p>}
+                    {recError && <p className="text-red-500 text-sm tracking-widest">Something went wrong.</p>}
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                         {recommendations.slice(0, 4).map((movie) => (
                             <div className="">
