@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 function CastCard({ actor }) {
     return(
         <Link to={`/person/${actor.id}`} >

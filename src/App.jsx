@@ -3,6 +3,7 @@ import Home from './pages/Home'
 import SearchResults from "./pages/SearchResults"
 import MovieDetail from "./pages/MovieDetail"
 import Favorites from "./pages/Favorites"
+import PersonDetail from "./pages/PersonDetail"
 
 function App() {
   return(

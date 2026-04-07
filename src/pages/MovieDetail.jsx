@@ -1,5 +1,5 @@
 import NavBar from "../components/NavBar";
-import { useParams, Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import CastSlider from "../components/CastSlider";
 import MovieCard from "../components/MovieCard";
 import useMovieDetail from "../hooks/useMovieDetail";
