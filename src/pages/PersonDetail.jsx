@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { useParams } from "react-router-dom"
 import NavBar from "../components/NavBar";
 import usePersonDetail from "../hooks/usePersonDetail";
@@ -5,6 +6,7 @@ import usePersonDetail from "../hooks/usePersonDetail";
 function PersonDetail() {
     const { id } = useParams()
     const { person, loading, error } = usePersonDetail(id)
+    const [openItems, setOpenItems] = useState([])
 
     if (loading) return (
         <div className="min-h-screen bg-zinc-950 flex items-center justify-center">
@@ -88,7 +90,7 @@ function PersonDetail() {
             </header>
             <main className="max-w-5xl mx-auto text-white w-full px-6 md:px-16 py-10">
                 {person.biography && (
-                    <section>
+                    <section className="mb-5">
                         <h3 className="text-red-500 font-bold mb-4">PERSONAL DETAILS</h3>
                         <div className="flex flex-col gap-4">
                             {person.biography.split('\n\n').map((paragraph, i) => (
@@ -96,6 +98,32 @@ function PersonDetail() {
                                     {paragraph}
                                 </p>
                             ))}
+                        </div>
+                    </section>
+                )}
+                {person.movie_credits?.cast.length > 0 && (
+                    <section>
+                        <h3>CAST</h3>
+                        <div>
+                            <div>
+                                {person.movie_credits?.cast.sort((a, b) => b.popularity - a.popularity).map((m) => (
+                                    <div key={m.id}>
+                                        <div 
+                                            onClick={() => setOpenItems(prev =>
+                                                prev.includes(m.id)
+                                                    ? prev.filter(id => id !== m.id)
+                                                    : [...prev, m.id]
+                                            )}
+                                            className="p-5 border-b border-zinc-800 overflow-hidden"
+                                        >
+                                            <p>{m.title}</p>
+                                        </div>
+                                        <div className={openItems.includes(m.id) ? "h-full border-b border-zinc-800 p-5" : "h-0 overflow-hidden"}>
+                                            <p>hi</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </section>
                 )}
