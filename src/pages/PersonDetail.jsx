@@ -50,7 +50,7 @@ function PersonDetail() {
                         />
                         <div className="absolute inset-y-0 left-0 w-1/4 bg-linear-to-r from-zinc-950 via-transparent to-transparent" />
                         <div className="absolute inset-y-0 right-0 w-1/4 bg-linear-to-l from-zinc-950 via-transparent to-transparent" />
-                        <div className="absolute inset-0 bg-linear-to-t from-zinc-950 via-transparent to-transparent" />
+                        <div className="absolute inset-x-0 bottom-0 h-1/4 bg-linear-to-t from-zinc-950 via-transparent to-transparent" />
                     </div>
                 </div>
                 <div className="relative z-10 max-w-5xl mx-auto w-full px-6 md:px-16 pb-12">
@@ -87,7 +87,18 @@ function PersonDetail() {
                 </div>
             </header>
             <main className="max-w-5xl mx-auto text-white w-full px-6 md:px-16 py-10">
-                <div>Personal details</div>
+                {person.biography && (
+                    <section>
+                        <h3 className="text-red-500 font-bold mb-4">PERSONAL DETAILS</h3>
+                        <div className="flex flex-col gap-4">
+                            {person.biography.split('\n\n').map((paragraph, i) => (
+                                <p key={i} className="text-zinc-300 text-sm leading-relaxed">
+                                    {paragraph}
+                                </p>
+                            ))}
+                        </div>
+                    </section>
+                )}
             </main>
         </div>
     )
