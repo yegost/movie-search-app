@@ -1,7 +1,9 @@
 import { useState } from "react"
 import { useParams } from "react-router-dom"
 import NavBar from "../components/NavBar";
+import MovieCard from "../components/MovieCard";
 import usePersonDetail from "../hooks/usePersonDetail";
+import useMovieDetail from "../hooks/useMovieDetail";
 
 function PersonDetail() {
     const { id } = useParams()
@@ -103,27 +105,42 @@ function PersonDetail() {
                 )}
                 {person.movie_credits?.cast.length > 0 && (
                     <section>
-                        <h3>CAST</h3>
+                        <h3 className="text-white font-bold mb-6">CAST</h3>
                         <div>
-                            <div>
-                                {person.movie_credits?.cast.sort((a, b) => b.popularity - a.popularity).map((m) => (
-                                    <div key={m.id}>
-                                        <div 
-                                            onClick={() => setOpenItems(prev =>
-                                                prev.includes(m.id)
-                                                    ? prev.filter(id => id !== m.id)
-                                                    : [...prev, m.id]
-                                            )}
-                                            className="p-5 border-b border-zinc-800 overflow-hidden"
-                                        >
-                                            <p>{m.title}</p>
-                                        </div>
-                                        <div className={openItems.includes(m.id) ? "h-full border-b border-zinc-800 p-5" : "h-0 overflow-hidden"}>
-                                            <p>hi</p>
+                            {person.movie_credits?.cast.sort((a, b) => b.popularity - a.popularity).map((m) => (
+                                <div key={m.id}>
+                                    <div 
+                                        onClick={() => setOpenItems(prev =>
+                                            prev.includes(m.id)
+                                                ? prev.filter(id => id !== m.id)
+                                                : [...prev, m.id]
+                                        )}
+                                        className={`overflow-hidden ${openItems.includes(m.id) ? "" : "border-b border-zinc-800"}`}
+                                    >
+                                        <div className="flex p-5 gap-5 cursor-pointer hover:text-olive-300">
+                                            <img src={openItems.includes(m.id) ? "/downarrow.png" : `/rightarrow.png`} className="w-5"/>
+                                            <p className="tracking-widest">{m.title}</p>
                                         </div>
                                     </div>
-                                ))}
-                            </div>
+                                    <div className={openItems.includes(m.id) ? "border-b border-zinc-800 p-5 flex gap-4" : "h-0 overflow-hidden"}>
+                                        <img 
+                                            src={m.poster_path 
+                                                ? `https://image.tmdb.org/t/p/w92${m.poster_path}` 
+                                                : "/posterPlaceholder.png"}
+                                            className="w-32 object-cover rounded"
+                                        />
+                                        <div className="flex flex-col justify-end gap-1">
+                                            <p className="text-white font-semibold pb-3">{m.title}</p>
+                                            <p className="text-zinc-400 text-sm">as <span className="text-white">{m.character}</span></p>
+                                            <div className="flex gap-3 mt-1">
+                                                {m.release_date && <p className="text-zinc-500 text-sm">{m.release_date.slice(0, 4)}</p>}
+                                                {m.vote_average !== 0 && <p className="text-yellow-500 text-sm">⭐ {m.vote_average.toFixed(1)}</p>}
+                                                {m.adult && <p className="text-red-500 text-sm">18+</p>}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     </section>
                 )}
