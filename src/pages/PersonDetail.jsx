@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 import NavBar from "../components/NavBar";
 import usePersonDetail from "../hooks/usePersonDetail";
 
@@ -141,7 +141,9 @@ function PersonDetail() {
                                             className="w-32 object-cover rounded"
                                         />
                                         <div className="flex flex-col justify-end gap-1">
-                                            <p className="text-white font-semibold pb-3">{m.title}</p>
+                                            <Link to={`/movie/${m.id}`}>
+                                                <p className="text-white font-semibold pb-3">{m.title}</p>
+                                            </Link>
                                             <p className="text-zinc-400 text-sm">as <span className="text-white">{m.character}</span></p>
                                             <div className="flex gap-3 mt-1">
                                                 {m.release_date && <p className="text-zinc-500 text-sm">{m.release_date.slice(0, 4)}</p>}
