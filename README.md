@@ -15,6 +15,12 @@ A dark, cinematic movie discovery app built with React and the TMDB API. Search 
 
 ---
 
+## 🌐 Live Demo
+
+👉 https://yegost.github.io/movie-search-app/
+
+---
+
 ## Tech Stack
 
 | Tool | Purpose |
