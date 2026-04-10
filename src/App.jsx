@@ -7,7 +7,7 @@ import PersonDetail from "./pages/PersonDetail"
 
 function App() {
   return(
-    <BrowserRouter>
+    <BrowserRouter basename="/movie-search-app">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/search" element={<SearchResults />} />
