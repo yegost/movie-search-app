@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { HashRouter, Routes, Route } from "react-router-dom"
 import Home from './pages/Home'
 import SearchResults from "./pages/SearchResults"
 import MovieDetail from "./pages/MovieDetail"
@@ -7,7 +7,7 @@ import PersonDetail from "./pages/PersonDetail"
 
 function App() {
   return(
-    <BrowserRouter basename="/movie-search-app">
+    <HashRouter>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/search" element={<SearchResults />} />
@@ -15,7 +15,7 @@ function App() {
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/person/:id" element={<PersonDetail />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
