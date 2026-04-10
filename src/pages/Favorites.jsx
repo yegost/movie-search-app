@@ -19,7 +19,7 @@ function Favorites() {
                         </div>
                         <div className="hidden sm:block ml-auto">
                             <img 
-                                src={`/hero.jpg`} 
+                                src={`${import.meta.env.BASE_URL}hero.jpg`} 
                                 alt="Absolute Cinema" 
                                 className="w-50 h-40 object-cover rounded-lg shadow-2xl border border-zinc-700 opacity-90"
                             />

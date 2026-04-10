@@ -48,7 +48,7 @@ function NavBar() {
                     className="cursor-pointer"
                     onClick={() => setNavOpen(!navOpen)}
                 >
-                    <img className="pt-2 pb-2" src="/nav.png" alt="Nav button" />
+                    <img className="pt-2 pb-2" src={`${import.meta.env.BASE_URL}nav.png`} alt="Nav button" />
                 </button>
                 {navOpen && (
                     <div 
@@ -62,7 +62,7 @@ function NavBar() {
                             className="cursor-pointer"
                             onClick={() => setNavOpen(false)}
                         >
-                            <img src="/close.png" alt="Close button" />
+                            <img src={`${import.meta.env.BASE_URL}close.png`} alt="Close button" />
                         </button>
                         <h3 className="text-white">MENU</h3>
                     </div>
@@ -98,7 +98,7 @@ function NavBar() {
                             className="text-zinc-400 hover:text-red-500 transition-colors cursor-pointer duration-200"
                         >
                             {!searchOpen && (
-                                <img src="/search.png" alt="Search button" className="w-6" />
+                                <img src={`${import.meta.env.BASE_URL}search.png`} alt="Search button" className="w-6 text-white" />
                             )}
                         </button>    
                     </div>

@@ -129,7 +129,7 @@ function PersonDetail() {
                                         className={`overflow-hidden ${openItems.includes(m.id) ? "" : "border-b border-zinc-800"}`}
                                     >
                                         <div className="flex p-5 gap-5 items-center cursor-pointer hover:text-olive-300">
-                                            <img src={openItems.includes(m.id) ? "/downarrow.png" : `/rightarrow.png`} className="w-5 h-5"/>
+                                            <img src={openItems.includes(m.id) ? `${import.meta.env.BASE_URL}downarrow.png` : `${import.meta.env.BASE_URL}rightarrow.png`} className="w-5 h-5"/>
                                             <p className="tracking-widest">{m.title}</p>
                                         </div>
                                     </div>
@@ -172,7 +172,7 @@ function PersonDetail() {
                                         className={`overflow-hidden ${openProd.includes(m.id) ? "" : "border-b border-zinc-800"}`}
                                     >
                                         <div className="flex p-5 gap-5 items-center cursor-pointer hover:text-olive-300">
-                                            <img src={openProd.includes(m.id) ? "/downarrow.png" : `/rightarrow.png`} className="w-5 h-5"/>
+                                            <img src={openProd.includes(m.id) ? `${import.meta.env.BASE_URL}downarrow.png` : `${import.meta.env.BASE_URL}rightarrow.png`} className="w-5 h-5"/>
                                             <p className="tracking-widest">{m.title}</p>
                                         </div>
                                     </div>

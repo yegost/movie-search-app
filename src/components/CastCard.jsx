@@ -5,7 +5,7 @@ function CastCard({ actor }) {
         <Link to={`/person/${actor.id}`} >
             <div key={actor.id} className="bg-zinc-800 w-36 h-full gap-1 overflow-hidden rounded-md">
                 <img 
-                    src={actor.profile_path ? `https://image.tmdb.org/t/p/w200${actor.profile_path}` : "/pfp.png"}
+                    src={actor.profile_path ? `https://image.tmdb.org/t/p/w200${actor.profile_path}` : `${import.meta.env.BASE_URL}pfp.png`}
                     alt={`${actor.name}`} 
                     className="w-full h-46 object-cover object-top"
                 />
