@@ -4,6 +4,8 @@ A dark, cinematic movie discovery app built with React and the TMDB API. Search 
 
 ---
 
+![image alt](https://github.com/yegost/movie-search-app/blob/6904d7b10b76ab4867bb0e2539a2b25680c0abf3/moviesearch.png)
+
 ## Features
 
 - **Movie Search** — debounced search with live recommendations
